@@ -136,13 +136,18 @@ export default {
     ],
     counter: 100
     },		// 同 react 的 state
-  effects: { // 定义 effects 成员
+  effects: { // 定义 effects 成员，用来处理异步操作
     'someEffect': function*() {},
     'someOtherEffect': function*() {},
-    // ...
+     getData: function* ({ payload }, { call, put }) {
+  		const data = yield call(SomeService.getEndpointData, payload, 		'maybeSomeOtherParams');
+         // 第一个参数是一个函数（返回值需要是 promise 对象），
+  		yield put({ type: 'getData_success', payload: data });
+         // put 用来发送一个 action，作用同 dispatch，由 effects 或 reducers 接收
+	}
   },
   reducers: {
-    // 定义方法
+    // 定义方法，需要是纯函数
       addNewCard(state, { payload: newCard }) {	// payload 作为额外信息传入
       const nextCounter = state.counter + 1;
       const newCardWidthId = {...newCard, id: nextCounter};
