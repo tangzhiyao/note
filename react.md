@@ -107,6 +107,14 @@
 
    5. key
 
+   6. react 的生命周期
+
+      ![react生命周期](C:\Users\tzy\Desktop\note\img-git\react生命周期.png)
+
+
+
+
+
 ### antdesign
 
 

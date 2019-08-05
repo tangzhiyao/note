@@ -127,8 +127,77 @@
 
 29. react 和 vue 中 key 的值尽量不要用数组下标，改变数组顺序 key 的值也会被改变。最好用元素的 id，避免一些问题
 
+30. react 不要在 render 中使用 setState，会导致死循环
+
+    渲染组件(render) => 触发 setState => 又触发渲染组件 。。。
+
+31. 函数的参数使用 `...` 运算符，函数体内得到的是一个数组
+
+    ```javascript
+    function open(...obj) {
+    	console.log(obj)
+    	return {
+    		...obj
+    	}
+    }
+    open(3)
+    // 输出： [3]
+    // 返回值 {0: 3}
+    
+    open({
+    	name: 'ttzy',
+    	age: 15
+    })
+    // 输出：[{...}]
+    //		0: {name: "ttzy", age: 15}
+    // 		length: 1
+    // 		__proto__: Array(0)
+    
+    // 返回值：{0: {...}}
+    // 		0: {name: "ttzy", age: 15}
+    // 		__proto__: Object
+    ```
+
+32. ```javascript
+    undefined ? true : false	// false
+    '' ? true : false	// true
+    '' == false		 // true
+    undefined == false 		// false
+    '' == undefined 	// false
+    0 == false		//true
+    null == undefined	// true; undefined 派生于 null 的
+    ```
+
+33. ```javascript
+    var a;
+    // var b;	// 未声明
+    
+    typeof a;	// undefined
+    typeof b;	// undefined
+    ```
+
+34. NaN本身有两个特点：  
+
+    1）任何涉及到NaN的操作（比如NaN/10）都会返回NaN  
+
+    2）NaN与任何值都不相等，包括自己本身。 
+
+    ```javascript
+    0/0				 // NaN
+    5/0 			 // Infinity
+    -5/0			 // -Infinity
+    Number(5)/0		  // Infinity
+    new Number(5)/0   // Infinity
+    
+    ```
+
+35. Number() 会对非数字类型的变量进行转换
+
+36. 
+
 **问题** （未解决）
 
 1.instanceof 和 typeof 
 
-2.JavaScript 单线程和事件循环，异步
+2.JavaScript 单线程和事件循环，异步	259  268
+
