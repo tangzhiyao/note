@@ -193,7 +193,13 @@
 
 35. Number() 会对非数字类型的变量进行转换
 
-36. 
+36. ![chrome_devTool](C:\Users\tzy\Desktop\note\img-git\chrome_devTool.png)
+
+    深颜色属性可以计数。浅颜色、显示暗淡的属性则不可计数。
+
+    参考：<https://developers.google.com/web/tools/chrome-devtools/javascript/step-code?hl=zh-cn> 
+
+37. s
 
 **问题** （未解决）
 
