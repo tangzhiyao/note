@@ -199,7 +199,24 @@
 
     参考：<https://developers.google.com/web/tools/chrome-devtools/javascript/step-code?hl=zh-cn> 
 
-37. s
+37. 标签换行在 chrome 浏览器中显示一个空格
+
+38. a 标签内部包含a标签在chrome会产生奇怪的错误
+
+39. 多行的行内元素垂直居中
+
+    使用 display: table-cell 和 vertical-align: middle 属性来定义需要居中的元素的父容器元素生成效果，如下：
+
+    ```
+    .parent {
+        background: #222;
+        width: 300px;
+        height: 300px;
+        /* 以下属性垂直居中 */
+        display: table-cell;
+        vertical-align: middle;
+    }
+    ```
 
 **问题** （未解决）
 

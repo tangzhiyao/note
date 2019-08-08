@@ -265,7 +265,7 @@
 
          将字符串作为代码运行；因为安全性(代码注入)，不推荐使用；
 
-       ​	
+       	​	
 
      * Math：
 
@@ -288,6 +288,66 @@
          * Math.ceil() 向上取整；
          * Math.floor() 向下取整；
          * Math.round() 四舍五入取整；
+
        * random() 返回一个介于 0 和 1 之间的一个随机数，不包括 0 和 1
+
        * Math.abs() 返回绝对值
+
        * Math.sqrt() 返回平方根
+
+6. 面向对象的程序设计：
+
+   * 两种简单的创建对象的方式：
+
+     * 创建一个 Object 的实例，为其添加方法和属性；
+     * 字面量的方式；
+
+   * ECMAScript 中的两种属性：
+
+     * 数据属性：
+
+       数据属性中包含一个数据值的位置。可以写入和读取值。数据属性中有四种描述(描述符)其行为的特性；
+
+       * [[Configurable]]：表示能否通过 delete 删除属性从而从新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性，默认值为 true；
+       * [[Enumerable]]：表示能否通过 for-in 循环返回属性，默认值为 true；
+       * [[Writable]]：表示是否能够修改属性值，默认值为 true；
+       * [[Value]]：包含这个属性的数据值，默认值为 undefined。
+
+       修改属性默认特性使用 Object.defineProperty() 方法，接受三个参数：属性所在的对象，属性名和一个描述符对象(详见 javascript 高级程序设计 p139 最后)。
+
+     * 访问器属性：
+
+       访问器属性不包含数据值；通过 getter 或 setter 函数返回或设置值
+
+       - [[Configurable]]：表示能否通过 delete 删除属性从而从新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性，默认值为 true；
+
+       - [[Enumerable]]：表示能否通过 for-in 循环返回属性，默认值为 true；
+
+       - [[Get]]：在读取属性时调用的函数，默认值 undefined；
+
+       - [[Setter]]：在写入属性时调用的函数，默认值 undefined；
+
+         ```javascript
+         var person = {
+             _name: 'tttzy',	// 下划线只是一种记号，用于表示只能用对象方法访问的属性。
+             age: 55
+         }
+         Object.defineProperty(person,'name',{
+             get: function() {
+             	return this._name
+         	},
+             set: function(value) {
+                 if(value === 'tttzy2') {
+                     this._name = value;
+                     this.age = 66;
+                 }          
+             }
+         })
+         person.name = 'tttzy2'
+         console.log(person.age) // 66
+         // 通过 set 设置 name 属性时同时改变了 age 属性。
+         ```
+
+       Object .defineProperties() ：一次性定义多个属性。
+
+       Object.getOwnPropertyDescriptor()：获取给定属性的描述符；
