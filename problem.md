@@ -207,7 +207,7 @@
 
     使用 display: table-cell 和 vertical-align: middle 属性来定义需要居中的元素的父容器元素生成效果，如下：
 
-    ```
+    ```css
     .parent {
         background: #222;
         width: 300px;
@@ -218,9 +218,106 @@
     }
     ```
 
-**问题** （未解决）
+40. 给 input:text 设置 keydown 按下时无法获取`当前`按下的字符值。页面渲染字符慢于代码执行。解决：在里面加入一个定时器，使代码后执行；这种方法可以用来防止阻塞后面代码的执行；
 
-1.instanceof 和 typeof 
+    ```javascript
+    input.onkeydwon(function() {
+        console.log(this.value)
+        let that = this
+        setTimeout(function(){
+            console.log(that.value)	// 独立调用。this 执行 window
+        },0)
+    })
+    ```
+
+    
+
+41. 匿名函数的执行具有全局性，内部的 this 指向  `window`，因此可以在外部函数中用变量接收 this，再传给匿名函数。 (javascript高级程序设计7.2.2 p182)
+
+42. 绝对定位元素的水平垂直居中
+
+    1. 已知宽高，使用 top: 50%; margin-top: -width/2;
+
+    2. 未知宽高，使用 top: 50%; transform: translateX(-50%);
+
+    3. 使用 display: table-cell  ` (不适用绝对定位)`
+
+       ```css
+       .parent {
+       		display: table;	/* 可以不写*/
+       		width: 250px;
+       		height: 250px;
+       		border: 1px solid black;
+       }
+       .child {
+       	width: 100px;
+       	height: 100px;
+       	display: table-cell;	/* 让元素内部元素垂直居中 */
+       	vertical-align: middle;
+       	border: 1px solid black;
+       }
+       ```
+
+    4. left:0; right:0;margin:auto;
+
+    ```css
+    .parent {
+            width: 250px;
+    		height: 250px;
+    		border: 1px solid black; 
+            position: relative;
+        }
+    .child {
+        width: 100px;
+    	height: 100px;
+        background-color: pink;
+        position: absolute;
+        left: 0;
+        right: 0;	/* 与 left 组合，水平居中 */
+        top: 0;
+        bottom: 0;	/* 与 right 组合，垂直居中 */
+        margin: auto;
+    }
+    ```
+
+43. 函数表达式后可以直接加括号立即执行；
+
+44. 对象在与基本类型比较时会调用 toString 或 valueOf 方法转换在比较，可以改写这两种方法。
+
+45. 闭包的作用：
+
+    1. 能够访问函数所在的环境上下文，阻止被回收；
+
+    2. 私有化变量
+
+       ```javascript
+       (function(){
+           var a = 'tttzy';
+           getA = function () {	// 没有加关键字，声明在全局
+       		console.log(a)
+           }
+       })()
+       ```
+
+    3. 模拟块级作用域(立即执行函数内部 return 函数)
+
+    4. 创建模块
+
+       ```javascript
+       function test() {
+           var a = 't';
+           var getA = function() {
+               console.log(a)
+           }
+           return {
+               getA,
+           }
+       }
+       ```
+
+       
+
+**问题** （未解决）
 
 2.JavaScript 单线程和事件循环，异步	259  268
 

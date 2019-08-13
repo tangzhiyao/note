@@ -8,6 +8,7 @@
 - 任何涉及到 NaN 的运算都返回 NaN；NaN 不等于任何值包括自身；字符串一旦创建就无法改变；
 - 在非数值的值前使用一元操作符(正负号)会对这个值进行转换，![image.png](https://static.dingtalk.com/media/lALPDeC2uRCFurTMplU_85_166.png_879x10000.jpg)
 - 对 null、NaN、undefined 使用 ！操作符，返回 true
+- 对象在用 `==` 进行比较时会调用 toString、valueOf() 等方法进行转换，再进行比较；
 
 
 
@@ -351,3 +352,220 @@
        Object .defineProperties() ：一次性定义多个属性。
 
        Object.getOwnPropertyDescriptor()：获取给定属性的描述符；
+
+7. 创建对象
+
+   * 工厂模式：
+
+     因为在 javascript 中无法创建类(es6 中引入 class 关键字)，所以创造了一种函数封装特定接口创建对象的细节；多次调用该函数并接受返回值就能解决创建多个相似对象。但是无法判断对象的类型；
+
+   * 构造函数模式：
+
+     * 自定义属性和方法，使用 new 操作符创建对象；构造函数的名字首字母要大写；
+     * new 操作符创建对象会经历下面 4 个过程：
+       1. 创建一个新对象；
+       2. 将构造函数的作用域赋给新对象；
+       3. 执行构造函数中的代码（添加属性和方法）；
+       4. 返回新对象；(当构造函数中有用 this 添加属性或方法则返回一个对象并指向该构造函数的实例；如果没有 this，且构造函数的返回值不是一个对象，则返回一个空对象；如果构造函数返回一个对象，且没有 this，则 new 返回构造函数的返回值)
+
+     * 构造函数也是一个函数，与其他函数的不同点在于调用的方式不同；`任何函数`也能当做构造函数使用；当构造函数不使用 new 创建对象，则返回 undefined(函数不指定 return，默认返回 undefined)；
+
+   * 原型模式：
+
+     * 每一个构造函数都有一个 prototype 指针，指向原型对象；
+     * 构造函数的 prototype 与实例对象的 \__proto__ 指向相同；
+     * 原型中可以存储属性或方法，所有实例都可以访问，但是在实例中不能重写原型中的属性和方法；
+     * 当使用某个属性或方法时，都会先从实例开始搜索该属性或方法，没找到则继续找它的原型中是否存在该属性或方法，直到原型链结束；
+     * 如果实例和原型中有同名属性，则实例中的属性会屏蔽原型中的属性，只能访问原型中的属性。
+     * hasOwnProperty() 检测一个属性存在于实例中还是原型中，实例中则返回 true；
+     * in 操作符可以确定一个属性是否在对象及其原型中；和 hasOwnProperty 方法结合则能判断一个属性在原型中还是对象中；
+     * for-in 循环。返回所有能够通过对象访问的、可枚举的属性（包括原型中的属性）；
+     * Object.keys() 可以取得对象中所有可枚举的`实例`属性；
+     * Object.getOwnPropertyNames()  可以获取所有`实例属性`；
+
+   * 组合使用构造函数模式和原型模式(最常用的一种方式)：
+
+     * 优点：
+       1. 每个实例都有一份自己的实例属性副本；
+       2. 共享原型中的属性；
+       3. 支持向构造函数传递参数；
+
+   * 动态原型模式：
+
+     将所有信息都封装在了构造函数中，必要时在狗在函数中初始化原型；
+
+   * 寄生构造函数模式：
+
+     创建一个函数，仅用来封装创建对象的代码，函数中返回对象；使用 new 操作符创建对象；
+
+8. 继承：
+
+   许多OO语言(Object Oriented)两种继承方式：`接口继承`(如 java 中的 interface)和`实现继承`；
+
+   接口继承只继承方法签名(参数及其类型，返回值及其类型)，实现继承则继承实际的方法；
+
+   由于 javascript 中的函数没有签名，所及无法实现接口继承，只支持实现继承；而实现继承则靠原型链来实现；
+
+   * 原型链
+
+     由于对象读取属性的特性(会在原型链上寻找属性或方法)，所以可以用来作为实现继承的方法；`实现的本质就是重写原型对象`: 使一个构造函数的原型指向需要继承的原型的实例；
+
+     使用 `instanceof` 来测试实例与原型之间的关系；
+
+     **注意** 给原型添加方法一定要在替换原型之后；实现继承后不要在用字面量的方式创建原型方法；
+
+     ```javascript
+     function Person() {
+     		this.name = 'Person'
+     }
+     function Student() {
+     	this.name = 'student';
+     }
+     Student.prototype = new Person()
+     Student.prototype = {	// 会重写原型
+     	age: 55,
+     	action(){}
+     }
+     ```
+
+     缺点：无法向 Person 中传递参数(一旦传递参数会影响所有 Student 实例);
+
+   * 借用构造函数：
+
+     在构造函数中使用 apply 或 call 方法：
+
+     ```javascript
+     function Person() {
+     	this.name = 'Person'
+     }
+     function Student() {
+     	Person.call(this)
+     }
+     ```
+
+     优点：可以传递参数且不影响实例的属性；
+
+     缺点：函数无法复用；
+
+   * 组合继承：
+
+     将原型链和借用构造函数方法组合使用；
+
+9. 函数表达式
+
+   * 函数声明
+
+     ```javascript
+     // 第一种
+     function first() {}	// 函数声明式
+     // 第二种
+     var second = function(){}	// 函数表达式
+     //第三种
+     function() {} // 匿名函数，也称拉姆达函数
+     ```
+
+     * 通过 functionName.name() 可以获取函数的名字，匿名函数返回空字符串。
+     * 使用 函数声明式声明函数，可以在代码的任意位置调用；使用函数表达式，则需要在复制后才能使用；
+
+   * 递归
+
+     递归函数实在一个函数通过名字调用自身的情况下构成的。
+
+     ```javascript
+     // 累加
+     function accumulation(n) {
+         if(n <= 1) {
+             return 1;
+         } else {
+             return n + accumulation(n-1);
+             // 上述方法有缺陷，建议 return n + arguments.callee(n-1);
+         }
+     }   
+     ```
+
+   * 闭包
+
+     闭包指的是有权访问另一个函数作用域中的变量的函数。
+
+     ```javascript
+     function outside(val) {
+         function inside() {
+             console.log(val)	// 访问了 outside 中的 val 变量，形成一个闭包
+         };
+         inside();
+     };
+     ```
+
+     * 关于 this 对象
+
+       this 对象是在运行时基于函数的执行环境绑定的：全局函数中，this 等于 window；被对象调用时，this 指向对象。
+
+       匿名函数的执行环境具有全局性，因此其 this 对象通常指向 window。
+
+   * 模仿块级作用域
+
+     因为 javascript 中没有块级作用域的概念而带来一些问题，所以用匿名函数来模仿块级作用域来避免问题。
+
+     ```javascript
+     (function () {
+         // 块级作用域 
+     })()
+     ```
+
+# BOM
+
+1. window 对象
+
+   在浏览器中，window 对象有双重角色，即使通过 JavaScript 访问浏览器窗口的一个接口，有事 ECMAScript 规定的 Global 对象。
+
+   在全局作用域中声明的所有变量和方法都会变成 window 对象的属性和方法。
+
+   ```javascript
+   var name = 'tttzy';
+   console.log(window.name) // tttzy
+   ```
+
+   全局变量不能通过 delete 删除，而通过 window 定义的属性可以通过 delete 删除。
+
+2. location 对象
+
+   location 对象提供了与当前窗口加载的文档有关的信息，还有一些导航功能。window.location 和 document.location 引用的是同一个对象。
+
+3. navigation 对象
+
+   识别客户端浏览器的事实标准。navigation 对象的属性通常用于检测显示网页的浏览器类型。
+
+4. screen 对象
+
+   基本上只是用来表明客户端的能力，其中包括浏览器窗口外部的显示器的信息，如像素宽度和高度等
+
+5. history 对象
+
+   保存着用户上网的历史信息，从窗口被打开的那一刻起。
+
+   方法：
+
+   * history.go()  参数传入一个整数，正数代表向前跳 n 步，负数代表向后跳 n 步。
+   * history.forward() 向前
+   *  history.back() 向后
+
+# 客户端检测
+
+因为不同的浏览器自带的功能不同
+
+
+
+## 窗口 //TODO
+
+ 
+
+
+
+
+
+
+
+
+
+
+
