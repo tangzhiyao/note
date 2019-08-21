@@ -555,11 +555,52 @@
 
 
 
+
+
+
+
+1. 事件委托：
+
+给父元素添加点击事件，通过 e.target 给获取点击的子元素添加事件：
+
+```javascript
+<ul id="list">
+		<li>1</li>
+</ul>
+<input type="button" value="click" id='btn'>
+
+<script>
+	var ul = document.querySelector('#list')
+	document.querySelector('#btn').addEventListener('click', function() {
+		var li = document.createElement('li');
+		li.innerText = Math.random();
+		ul.appendChild(li)
+	});
+	document.querySelector('#list').addEventListener('click', function(e) {
+		console.log(e.target.innerText)	// 即使新添加的li标签也有事件
+        // 可以用 switch case 判断
+	});
+</script>
+```
+
+优点：
+
+* 每个函数都是对象，会大量占用内存。事件委托可以减少内存占用，提高性能；
+* 新增的子元素不必再添加事件。
+
+2. 错误处理：
+
+   try catch 语句捕捉和处理错误；
+
+   throw 抛出错误；
+
+   js 是弱类型语言，所以对变量进行检查不仅仅检查变量是否为空，同时要检查变量的类型；
+
+
+
 ## 窗口 //TODO
 
  
-
-
 
 
 

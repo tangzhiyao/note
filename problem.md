@@ -351,6 +351,118 @@
 
 51. 循环给页面添加节点，必须在循环内创建新的节点。如果在循环外创建节点，在循环内不断执行添加节点的操作，该节点始终只添加一次，如果给多个 dom 添加该节点，则只会加在最后一个 dom 节点中(从第一个一直挪动到最后的节点)。
 
+52. 遮罩的一般写法：
+
+    ```css
+    cover{
+        position: fixed;
+        left: 0;
+        top: 0;
+        right:0;
+        bottom: 0;
+        background-color: reba(0,0,0,0.3);S
+    }
+    ```
+
+53. 判断变量的类型：
+
+    * instanceof
+
+    * typeof
+
+    * 判断是否是数组 Array.isArray()
+
+    * Object.prototype.toString.call(value); // [object 变量类型]
+
+      ```javascript
+      Object.prototype.toString.call([])
+      "[object Array]"
+      Object.prototype.toString.call(5)
+      "[object Number]"
+      Object.prototype.toString.call('s')
+      "[object String]"
+      Object.prototype.toString.call(null)
+      "[object Null]"
+      Object.prototype.toString.call(undefined)
+      "[object Undefined]"
+      Object.prototype.toString.call(/a/)
+      "[object RegExp]"
+      Object.prototype.toString.call(Symbol())
+      "[object Symbol]"
+      Object.prototype.toString.call({})
+      "[object Object]"
+      Object.prototype.toString.call(Function)
+      "[object Function]"
+      ```
+
+54. 构造函数中的 this 最好进行判断 this instanceof constructorName ; 当未使用 new 操作符时，函数中的 this 绑定到 window 上。但是在继承时可能会出现问题，在另一个构造函数中用 call 继承会失败。可以用原型链；
+
+55. function 中的 this 的指向问题
+
+    * 全局环境中 this 始终指向 `全局对象` window
+    * 在函数内部，`this`的值取决于函数被调用的方式。 
+
+    
+
+    MDN 中关于 this的文档里写到“函数被用作DOM事件处理函数时，它的`this`指向触发事件的元素” 
+
+    ```javascript
+    function Person() {
+    		this.name = 'tttzy';
+    		window.onhashchange = this.reload.bind(this)
+        // 不绑定 this 的话，在改变 hash 时会导致 reload 中的 this 指向 window
+    }
+    
+    	Person.prototype.reload = function() {
+    		console.log(this)
+    	}
+    	var s = new Person() 
+    ```
+
+56. this 的指向
+
+    函数内部的 this：
+
+    * 简单调用：
+
+      全局中直接调用函数：this 指向全局；
+
+    * bind 方法：
+
+      this `永远` 被绑定在 bind 的第一个参数，无论函数怎么调用；
+
+    * 箭头函数：
+
+      this 与函数外部的语法环境的 this 保持一致(两者相等)；
+
+      ```javascript
+      function test() {
+      	var that = this;
+      	((para)=> {
+      		console.log(this === that);	// true
+      	})(that);
+      }
+      test();
+      ```
+
+    * 作为对象的方法
+
+      this 指向调用该函数的对象；即使在外部定义函数，由对象调用，依然指向`对象性` ，看出 `this` 的绑定只受最靠近的成员引用的影响。 例如 out.inner.foo() 指向对象inner；
+
+    * 作为构造函数：
+
+      当函数用作构造函数，则 this 被绑定到正在构造的新对象；
+
+      虽然构造器返回的默认值是 `this` 所指的那个对象，但它仍可以手动返回其他的对象（如果返回值不是一个对象，则返回 `this` 对象）。 
+
+    * 作为一个DOM事件处理函数
+
+      当函数被用作事件处理函数时，它的`this`指向`触发事件的元素`（一些浏览器在使用非`addEventListener`的函数动态添加监听函数时不遵守这个约定）。 
+
+57. 箭头函数会默认忽略掉 call 和 apply 的第一个参数
+
+    
+
 **问题** （未解决）
 
 2.JavaScript 单线程和事件循环，异步	259  268
