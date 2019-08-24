@@ -501,6 +501,49 @@
 
 60. 节流函数用了闭包，外部函数记录timeid，return的内部函数判断timeid，注意要在定义事件外调用节流函数，返回的内部函数在定义的dom事件内调用；（防抖的原理也是一样，清除定时器id），给函数参数添加属性也能做到
 
+61. 根据BFC布局规则第六条：
+
+    计算BFC的高度时，浮动元素也参与计算；所以 overflow：hidden 清除浮动的原理就是创建了一个 BFC ，所以计算了内部的浮动元素
+
+62. 伪元素清除浮动原理：
+
+    clear:
+
+    ​	当应用于非浮动块时，它将非浮动块的[边框边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)移动到所有相关浮动元素[外边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)的下方。这个非浮动块的[垂直外边距](https://developer.mozilla.org/en-US/docs/CSS/margin_collapsing)会折叠。
+
+    ​	当应用于浮动元素时，它将元素的[外边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)移动到所有相关的浮动元素[外边框边界](https://developer.mozilla.org/en-US/docs/CSS/box_model)的下方。  
+
+    ```javascript
+    ul {
+    	border: 1px solid skyblue;
+    }
+    
+    li {
+        border: 1px solid pink;
+        width: 100px;
+        float: left;
+        height: 50px;
+        list-style: none;
+    }
+    div {   /* 模拟伪元素清除浮动原理 */
+         width: 100px;
+         height: 0px;
+         clear: both;	// 将元素移至浮动元素的下方
+    }
+    ```
+
+63. margin 为负值产生的影响：
+
+    * margin-left/right：-50px；在左边(右边)会超出容器 50px 的大小；
+    * top：会将元素上下移动；
+    * bottom：无变化，但会使页面中渲染结果读到的实际值为 `padding+content+border-marginBottom` 所以左右自适应高度的父容器高度始终是最高的那个。js 读取的实际高度仍然为 `padding+content+border`
+    * 对于绝对定位元素，负margin会基于其绝对定位坐标再偏移， 
+    * 对于浮动元素，第一层浮动元素占满一行，下一层浮动元素，如果给 margin-left 的 负值超过自生的宽度，则会到上一行去，覆盖在上一行的元素上
+
+    
+
+    
+
     
 
     
