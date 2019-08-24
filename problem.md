@@ -461,6 +461,48 @@
 
 57. 箭头函数会默认忽略掉 call 和 apply 的第一个参数
 
+58. 解构赋值的几种用法：
+
+    * 交换变量：
+
+      ```javascript
+      var a=3,b=4;
+      [a,b]=[b,a];
+      ```
+
+    * 访问数组中元素：如果数组元素为空可以赋默认值
+
+      ```javascript
+      var [color="red"] = ['blue','yellow','pink']; // 当第一个数组元素为空，color为默认值red
+      ```
+
+    * 任何可迭代对象都可以用结构赋值，
+
+      [迭代协议]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols
+
+      ```javascript
+      var arr = [1,2,3,4];
+      typeof arr[Symbol.iterator]()	// 'function'
+      // 可以自定义的对象添加迭代函数，也能用于解构赋值；
+      var obj = {
+          [Symbol.iterator]() {
+              // 代码
+          } 
+      }
+      ```
+
+59. 对象的属性名可以这么写：
+
+    ```javascript
+    var a = 'c';
+    console.log({[a]: 'name'});
+    // { c: 'name' }
+    ```
+
+60. 节流函数用了闭包，外部函数记录timeid，return的内部函数判断timeid，注意要在定义事件外调用节流函数，返回的内部函数在定义的dom事件内调用；（防抖的原理也是一样，清除定时器id），给函数参数添加属性也能做到
+
+    
+
     
 
 **问题** （未解决）
