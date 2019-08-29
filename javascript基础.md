@@ -55,12 +55,25 @@
 
        - 创建执行对象的过程：
          1. 建立 arguments 对象，检查当前上下文中的参数，建立该对象下的属性与属性值；
+
          2. 检查当前上下文中的函数声明，在变量对象中一函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果函数名重复，则会被新的引用覆盖；
+
          3. 检查当前上下文中的变量声明，在变量对象中以变量名建立一个属性，值为 undefined（变量提升的原因）。`如果变量名已存在则跳过，无论值是什么`；
+
+            ```javascript
+            function test2() {
+            	console.log(a)	// function a(){}
+            	var a = 2;
+            	console.log(a)	// 2
+            	function a() {}
+            }
+            ```
+
+            
 
      - 执行阶段：
 
-       创建完成后就开始执行代码，这时会完成变量赋值，函数引用和执行其他代码；![EC创建阶段](C:\Users\tzy\Desktop\note\img-git\EC执行阶段.png)注：变量 n 在函数 inner 之前声明但 inner 在前，可以看出函数的优先级高
+       创建完成后就开始执行代码，这时会完成变量赋值，函数引用和执行其他代码；![EC创建阶段](C:\Users\tzy\Desktop\note\img-git\EC执行阶段.png)
 
      - 执行完毕后出栈，等待被回收
 
@@ -608,7 +621,7 @@
 
    * 密封的对象：
 
-     密封对象不可扩展，而且已有成员的 [[Configurable]] 特性江北设置为 false。意味着不能删除属性和方法，属性值可以修改；使用 Object.defineProperty(obj) 可以设置密封的对象，使用 Object.isSealed(obj) 检测；
+     密封对象不可扩展，而且已有成员的 [[Configurable]] 特性设置为 false。意味着不能删除属性和方法，属性值可以修改；使用 Object.defineProperty(obj) 可以设置密封的对象，使用 Object.isSealed(obj) 检测；
 
    * 冻结的对象：
 
