@@ -577,7 +577,44 @@
 
 71. 伪元素创建的元素不在 DOM 树中
 
-    
+72. 通过 proxy 代理可以在前端解决跨域问题
+
+    配置在 config.js 或者在 webpack.config.js 文件中
+
+    ```javascript
+     proxy: {
+        '/api': {
+          target: 'http://api.tietalocal.com',
+          changeOrigin: true,
+          pathRewrite: { '^/server': '' },
+        },
+      },
+    ```
+
+73. 前端发送请求会先找 mock 的路径，没有才去服务端的接口
+
+74. 在constructor和componentWillReceiveProps都进行props的赋值，才可以解决props设置state的问题： 
+
+75. 箭头函数不能被用作构造函数；
+
+76. React 中不要去修改 props 属性；
+
+77. es6 的 class 中定义的方法中如果有 this，这个 this 是指向实例的 this，如果需要单独调用这个方法注意要 this 的指向；
+
+    例如：react 的 onClick 方法中要调用含有 this 的方法，
+
+    * 在 constructor 中绑定 this
+    * 使用 箭头函数定义方法；
+
+78. 通过 bind 可以传给函数参数，例如 onClick={handleClick.bind(this, params)}
+
+79. 检查相应数据是否属于 state：
+
+    1. 该数据是否是由父组件通过 props 传递而来的？如果是，那它应该不是 state。
+    2. 该数据是否随时间的推移而保持不变？如果是，那它应该也不是 state。
+    3. 你能否根据其他 state 或 props 计算出该数据的值？如果是，那它也不是 state。
+
+80. 
 
     
 
@@ -588,3 +625,8 @@
 2.JavaScript 单线程和事件循环，异步	259  268
 
 看下 es6 中的 class extends 的实现。
+
+简历模板制作
+
+1. 左边菜单；增加新的；
+2. 

@@ -163,6 +163,12 @@ module.exports = {
 
 
 
+8）通过 proxy 代理可以在前端解决跨域问题
+
+
+
+
+
 other：
 
 ​	阮一峰 webpack 教程：<https://github.com/ruanyf/webpack-demos> 
