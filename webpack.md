@@ -81,7 +81,13 @@ module.exports = {
 
 
 
+​	3）常用 loader		<https://www.jianshu.com/p/71b811e973d4> 
 
+* 处理静态文件：file-loader、url-loader(图片处理)、raw-loader(将文件导入为字符串。)
+* 处理样式模块：style-loader、css-loader、sass-loader、less-loader、postcss-loader(自动给样式增加前缀)
+* 处理数据文件：csv-loader、xml-loader
+* 处理模块语言：html-loader、markdown-loader
+* 处理测试模块：mocha-loader、eslint-loader
 
 5）babel		E:\MyWork1\webpack\wp_es6
 

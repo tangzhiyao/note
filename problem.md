@@ -614,7 +614,28 @@
     2. 该数据是否随时间的推移而保持不变？如果是，那它应该也不是 state。
     3. 你能否根据其他 state 或 props 计算出该数据的值？如果是，那它也不是 state。
 
-80. 
+80. input 自动填充时有背景颜色，
+
+    ```css
+     input:-internal-autofill-selected{
+        background-color: #fff;
+        background-image: none;
+        color: $gray;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+        -webkit-text-fill-color: $gray !important;
+      }
+      input:-webkit-autofill {
+        background-color: #fff;
+        background-image: none;
+        color: $gray;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+        -webkit-text-fill-color: $gray !important;
+      }
+    ```
+
+    
+
+81. 
 
     
 

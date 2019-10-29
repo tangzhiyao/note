@@ -113,7 +113,15 @@
 
 
 
+7. 挂载：
 
+   原文：挂载是初始化 React 组件的过程。该过程通过创建组件所代表的 DOM 元素，并将它们插入到提供的 `container` 中来实现。 
+
+   将 组件描述 转化为真实的 DOM 结构，插入到 提供的容器内。
+
+   ![component-HTML](C:\Users\tzy\Desktop\note\img-git\React-theory\component-HTML.svg)
+
+8. 
 
 ### antdesign
 

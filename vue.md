@@ -361,7 +361,15 @@ let router = new VueRouter({
 
 ​	案列:Vue_router
 
+vue-router 的钩子函数
 
+1. Vue.beforeEach(function(to,form,next){})  	在跳转之前执行
+
+* to：需要跳转到的页面
+* from：从哪个页面跳转过来的
+* next：函数中需要执行一次
+
+2. Vue.afterEach(function(to,form))	在跳转之后判断
 
 
 
