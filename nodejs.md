@@ -112,6 +112,12 @@ b 和 c 都是一个console 语句
 
 运行 a.js ： b.js console 执行输出语句，然后 c.js 执行输出语句。但 a.js 不会再重复执行 c.js 中的 console 语句，但是能拿到 c.js 中的 module 导出的内容 （b.js 执行时已经加载过 c.js ，缓存中已经有了。所以 a.js 执行时直接拿到导出内容）
 
+* 模块加载顺序
+
+  文件模块缓存 > 原生模块 > 文件模块
+
+  ![](C:\Users\tzy\Desktop\note\img-git\nodejs\nodejs-require.jpg)
+
 
 
 ##### **5.第三方模块加载过程**
