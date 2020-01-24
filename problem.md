@@ -635,9 +635,25 @@
 
     
 
-81. 
+81. 给 td 设置宽度，在浏览器中可能会有几像素的偏差。设置 table 的style， table-layout: fixed
+
+82. this.setState() 在 react **生命周期中调用是异步**的，如果直接用 addEventListener 之类的直接使用 setState 则是**同步**更新 state
+
+    ```javascript
+    //  
+    this.setState((state) => {
+        // 重要：在更新的时候读取 `state`，而不是 `this.state`。
+        return {count: state.count + 1}
+     });
+    ```
 
     
+
+83. antdesign 坑：getFieldDecorator 包裹 Upload 组件时，第一个 form 的字段名不能和其他组件重复。否则会导致 onChange 不能触发
+
+84. 
+
+     
 
     
 
@@ -650,4 +666,4 @@
 简历模板制作
 
 1. 左边菜单；增加新的；
-2. 
+2.  
