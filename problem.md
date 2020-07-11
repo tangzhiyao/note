@@ -78,7 +78,7 @@
     background-repeat: round;/*如果图片大于容器则缩放到与容器大小一致*/
     ```
 
-25. this 传递丢失
+25. this 传递丢失 (新增85)
 
     ```javascript
     var obj = {
@@ -651,7 +651,87 @@
 
 83. antdesign 坑：getFieldDecorator 包裹 Upload 组件时，第一个 form 的字段名不能和其他组件重复。否则会导致 onChange 不能触发
 
-84. 
+84. Number(null、空字符串) 返回 0， 而 undefined、NaN等返回 NaN
+
+85. 逗号运算符：对每个操作进行求值，最后返回最右边的值
+
+    ```javascript
+    (0, 1) // 返回 1
+    (0, 1, 2)	// 返回 2
+    
+    (0, function(){})()	// 返回 function(){}	注意：这里会发生 this 丢失
+    // this传递丢失(传递丢失，见25)
+      var a = 'window.a' 
+      let o = {
+        a: 'o.a',
+        getA: function() {
+          console.log(this.a)
+        }
+      }
+      (1, o.getA)()	// 输出 window.a	(1, o.getA) 返回了getA函数，之后再调用，this指向window
+      (o.getA)()	// 输出 o.a，没有传递这个过程，所以this并未丢失
+    
+    ```
+
+86. link 标签的一些用法:
+
+    * 通过 href 引入 css 样式，rel 为 stylesheet
+
+    * 通过 href 引入其他资源，rel 为对应的值，例如 引入图标
+
+      ```css
+      <link rel="icon" href="favicon.ico">
+      ```
+
+    * 还有 media 属性，通过媒体查询，在满足媒体查询的条件时才被加载
+
+    * rel 设置为 preload 表示浏览器需要预加载该资源
+
+    * crossorigin 属性表示该资源是否需要用一个 cors 请求去获取
+
+87. IntersectionObserver 用于观察**目标元素**是否与**父元素**有交叉，常用：懒加载、无限滚动
+
+    ```javascript
+    cosnt intersectionObserver = new IntersectionObserver((entries, observer) => {
+    	// 监听事件
+    }, { // 配置
+        root: Element,	// 监听对象的祖先元素
+        rootMargin: '22px',	// 距离祖先元素边界多少距离被触发
+        threshold: [], 	// 元素在0~1之间，交叉区域与被监听的元素的比率为设定值时触发，
+    })
+    intersectionObserver.observer(Element)	// 开始监听元素
+    intersectionObserver.unobserve(Element)	// 停止监听摸个对象
+    intersectionObserver.disconnect()	// 使IntersectionObserver对象停止监听工作。
+    ```
+
+    
+
+88. css 许多属性有 inherit 值，可以用来继承父元素的值。例如: a 标签可以把 color 设置为 inherit，直接继承父元素的 color 值。
+
+89. img 属性：
+
+    * object-fit：css 属性，可以控制图片大小，类似 background-size 属性
+    * object-position： css 属性，可以控制图片位置，类似 background-position 属性
+
+90. 取整数：
+
+    * Math.ceil()
+    * Math.floor()
+    * (波浪号)~0.1   输出-1。     计算规则：数值 +1，在取反
+
+91. nodejs 进程守护 // TODO
+
+    由于 Nodejs 是单线程，一旦遇到严重错误退出 Nodejs 进程，导致应用瘫痪。所以需要进程守护帮助重启进程。
+
+    eggjs 提供了 egg-cluster 来守护进程
+
+92. 为什么 React 组件头部都要引入一个 React 对象？
+
+    因为使用了 jsx 语法，jsx 语法转换后就是 React.createElement() 所以必须要有。
+
+    因为需要频繁引入，有提供插件能够自动引入 babel-plugin-react-require
+
+93. filter: drop() 为不规则图形添加阴影
 
      
 
