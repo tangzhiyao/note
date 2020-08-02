@@ -121,6 +121,55 @@
 
    ![](C:\Users\tzy\Desktop\note\css效果图\斜条纹.png)
 
-10. 
+10. 单个元素实现图片当做边框。
 
+    ```css
+    #test {
+        width: 200px;
+        height: 200px;
     
+        border: 30px solid transparent;
+        background: linear-gradient(white, white),
+        url(http://placekitten.com/200/300);
+        background-clip: padding-box, border-box;
+        /*
+        * 由于背景图片是以padding的左上角开始铺的，所以如果不加后两个属性，会导致边框有奇怪的拼接效果。
+        * 所以设置 origin 属性，使得背景以边框的左上角开始平铺，并且大小充满元素。
+        */
+        background-origin: border-box;
+        background-size: cover;
+    }
+    ```
+
+    ![](C:\Users\tzy\Desktop\note\css效果图\图片边框.png)
+
+11. 其他方式实现虚线边框
+
+    ```css
+    #test {
+        width: 200px;
+        height: 200px;
+        border: 1px solid transparent;
+        background: linear-gradient(white, white) padding-box,
+        repeating-linear-gradient(45deg, black, black 10px, white 10px, white 20px);
+        /**animation: ants 12s linear infinite;**/
+    }
+    @keyframes ants { to { background-position: 200px } }
+    
+    /**
+     * 如果添加上动画，可以实现 ps 中的选择框的动态效果
+     * 这种方式可以定义虚线的大小，宽度，间隔宽度。 
+     */
+    ```
+
+    ![](C:\Users\tzy\Desktop\note\css效果图\背景实现虚线边框.png)
+
+12. border-radius:
+
+    一般常用的是直接给一个值，产生圆角的效果。
+
+    第二种是给多个值，分别去设置每个角的弧度。
+
+    第三种是两个值之间用 `/` 分隔，可以设置水平和垂直半径。（实现椭圆）
+
+13. 
