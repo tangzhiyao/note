@@ -733,9 +733,59 @@
 
 93. filter: drop() 为不规则图形添加阴影
 
-     
+94. 注意发布订阅模式记得在组件销毁时解除绑定
 
-    
+95. visibilitychange 事件，在当前页面标签被切换(隐藏)后或者最小化后触发。注意浏览器的兼容性。通过 document.hidden 属性可以获取当前页面是否隐藏。（主播中心，anchorCenter.vue）
+
+96. git merge 关于三路合并算法：
+    三路合并算法是用于解决冲突的一种方式，当产生冲突时，三路合并算法会获取三个节点：本地冲突的B节点，对方分支的C节点，B，C节点的共同最近祖先节点A。三路合并算法会根据这三个节点进行合并。具体过程是，B，C节点和A节点进行比较，如果B，C节点的某个文件和A节点中的相同，那么不产生冲突；如果B或C只有一个和A节点相比发生变化，那么该文件将会采用该变化了的版本；如果B和C和A相比都发生了变化，且变化不相同，那么则需要手动去合并;如果B，C都发生了变化，且变化相同，那么并不产生冲突，会自动采用该变化的版本。最终合并后会产生D节点，D节点有两个父节点，分别为B和C。
+
+97. 流程图工具：yEd    https://www.yworks.com/downloads
+
+98. 关于 checkout 的一些使用：
+
+    * git checkout 分支名；    切换分支
+
+      注意：在 checkout 切换分支时，可能会带有当前分支的修改到切换的分支上。
+
+      1. 1. 当切换到与当前分支记录相同的分支时(两分支的 hash 值相同)，会导致切换分支带着修改。例如：从 master 分支通过 checkout -b 命令新建分支 t1，t1 修改后没有 commit 或者 stash 保存，直接切回 master 分支，会导致 t1 的修改带回 master 分支。
+         2. 在某一分支进行修改后，未保存，通过 checkout -b 新建分支，会导致修改带到新建分支。
+         3. 当只创建新文件，由于未对该文件建立跟踪，新文件也会在切换时被带到切换的分支。
+
+      建议：在切换分支时，需要查看当前是否有修改，对修改进行提交或者通过 stash 进行保存。不能依靠 git 的检查终止。
+
+    * git checkout -b 分支名；  新建并切换分支
+
+    * git checkout  哈希值；   切换到某一次的提交，此时会进入头指针分离状态，类似于一种沙盒状态，可以做任意修改，而不影响分支。也可以通过新建分支来保存修改。
+
+    * git checkout -- file;    将工作区的文件回退到与暂存区相同，如该文件没有放到暂存区，则回到与版本库相同的状态。
+
+99. 通过 image-mask 将 png 图片作为遮罩，可以减少图片体积。https://www.zhangxinxu.com/wordpress/2020/05/css-mask-compress-png-image/
+
+100. html 自定义元素，类似 vue 中的自定义组件，浏览器解析时不认识该标签，会保留下来。操作该标签和其他普通标签没有区别，也能使用标签选择器，js 也能正常获取 DOM。自定义标签继承于 HTMLUnknownElement 对象。
+
+101. 误区：并不是 height === line-height 使得文字垂直居中。而是行高的特性(垂直居中性)导致的。所以即使去除height 文字也能垂直居中。line-height 可以撑开盒子，而不是文字。
+
+102. 文字添加边框：-webkit-text-stroke：2px color。
+
+103. 背景裁剪：background-clip，属性为 text 时，属性名为 -webkit-background-clip。
+
+     ```css
+     background: linear-gradient(white 30%, yellow);
+     -webkit-background-clip: text;
+     filter: drop-shadow(4px 5px 0px black);
+     -webkit-text-stroke: 4px red;	
+     ```
+
+104. Chrome inspact调试微信内置浏览器页面：仅限android
+
+     * 微信打开 http://debugx5.qq.com
+     * 切换到 **信息** tab，勾选打开TBS内核inspector调试功能
+     * 数据线连接手机打开chrome的调试功能（似乎不需要vpn）
+
+105. 
+
+
 
 **问题** （未解决）
 
