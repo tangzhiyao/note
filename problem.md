@@ -783,7 +783,27 @@
      * 切换到 **信息** tab，勾选打开TBS内核inspector调试功能
      * 数据线连接手机打开chrome的调试功能（似乎不需要vpn）
 
-105. 
+105. 事件中的 isTrusted 属性返回一个 Boolean 值，用来表明该事件是否可信任。true 代表由用户的实际操作触发，false 表示由脚本触发。
+
+106. steps: 将动画分段
+
+     ```css
+     animation: bg 6s steps(2, end) forwards;
+     @keyframes bg {
+         30% { background: pink; }
+         60% { background: slateblue; }
+     }
+     /* 
+     例如 0% 40% 60% 100%；属性 steps(2, start)
+     执行的阶段为 20% 40% 50% 60% 80% 100% 
+     如果属性为 steps(2, end)
+     执行的阶段为 0% 20% 40% 50% 60% 80% 
+     */
+     ```
+
+     
+
+
 
 
 
