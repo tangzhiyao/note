@@ -192,3 +192,16 @@
     * 大于180度，需要将矩形的颜色变换为粉色
 
     ![](..\note\css效果图\180饼图.png)
+
+15. 通过角向渐变实现饼图
+
+    ```CSS
+    .demo {
+        width: 100px; height: 100px;
+        border-radius: 50%;
+        background: conic-gradient(#655 40%, yellowgreen 0);
+    }
+    ```
+
+    ![](..\note\css效果图\角向渐变饼图.png)
+
