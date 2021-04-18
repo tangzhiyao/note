@@ -10,13 +10,13 @@
 
 6.使用 document 获取的元素列表无法直接用 foreach 直接循环，需要用 Array.from(元素) 转换成数组
 
-7.使 使用绝对定位的元素居中 可以使用 left: 50%；margin-left:  **-**元素宽度一半; 来实现
+7.使用绝对定位的元素居中 可以使用 left: 50%；margin-left:  **-**元素宽度一半; 来实现
 
 8. p 标签内不能嵌套 div 。内联 = 行内。p div{}  选择器无法选中
 
 		块元素可以包含内联元素或某些块元素，但内联元素却不能包含块元素 只能包含其他的内联元素 
 
-9.域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js、css、图片等） --> 浏览器对页面进行渲染呈现给用户
+9. 域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js、css、图片等） --> 浏览器对页面进行渲染呈现给用户
 
 10. 使用伪元素显示一些效果需要加上 content：“”； 否则无法显示出来
 
@@ -193,7 +193,7 @@
 
 35. Number() 会对非数字类型的变量进行转换
 
-36. ![chrome_devTool](C:\Users\tzy\Desktop\note\img-git\chrome_devTool.png)
+36. ![chrome_devTool](.\img-git\chrome_devTool.png)
 
     深颜色属性可以计数。浅颜色、显示暗淡的属性则不可计数。
 
@@ -783,7 +783,7 @@
      * 切换到 **信息** tab，勾选打开TBS内核inspector调试功能
      * 数据线连接手机打开chrome的调试功能（似乎不需要vpn）
 
-105. 事件中的 isTrusted 属性返回一个 Boolean 值，用来表明该事件是否可信任。true 代表由用户的实际操作触发，false 表示由脚本触发。
+105. 事件中的 isTrusted 属性返回一个 Boolean 值，用来表明该事件是否可信任。true 代表由用户的实际操作触发，false 表示由脚本触发。**(不准确，不建议使用)**
 
 106. steps: 将动画分段
 
@@ -801,13 +801,198 @@
      */
      ```
 
+107. 关于函数参数的默认值: 仅当传入参数为 `undefined` 时才会使用默认值，如果传入 null 则接受到的值依然是 null。
+
+108. width 属性的关键词：
+
+     * min-content: 将解析为这个容器内
+
+       部最大的不可断行元素的宽度（即最宽的单词、图片或具有固定宽度的盒元
+
+       素）
+
+109. margin 和 padding 的百分比值是以 `父元素` 的**宽度**作为解析基准的
+
+110. 关于 错误捕获，promise内部的错误，在外部的try catch不能捕获到，通过设置定时器可以捕获到。异步代码需要用await否则外部的try catch 也不能捕获到(try catch 的同步代码走完了，异步任务还未执行，所以捕获不到异步任务的错误)。
+
+111. 端口号：计算机中每个应用程序都对应着一个端口，为了进行区分，又对每一个端口进行编号，叫做端口号。例如每一个ip对应着一台计算机，可以通过ip寻找到某一台特定的计算机。端口号也是如此，通过端口号可以找到某一个应用。所以端口号不能重复。所以在用 devServer 启动多个服务的时候需要指定不同的端口号。
+
+112. History.pushState(Object, '', url); 向浏览器的历史记录中添加一条，类似于hash路由(#test)，并不会去加载url。history.back() 会返回到上一条记录中。
+
+113. popState事件仅能够监听到 history.back , history.forward, 浏览器前进后退的动作；使用 history.pushState, history.replaceState 是监听不到的。
+
+      vue-router中通过 router.push 方法是不会触发 popState 事件的。那是如何加载组件的？猜测是根据路由的配置文件 router.js 来找打对应的组件。待验证。
+
+114. webpack打包分析工具，webpack-bundle-analyzer   文档:  https://www.npmjs.com/package/webpack-bundle-analyzer
+
+115. 当根目录已安装依赖(test1)的子依赖包(a)版本和根目录下的依赖包(a)版本冲突后，在 package-lock.json 中的 test1 下会添加一个 dependencies 属性，里面包含着 test1 下的子依赖包(a) 的版本。
+
+      https://zhuanlan.zhihu.com/p/128625669
+
+      ![/](/Users/zdwh/Desktop/工作日志/note/img-git/npm依赖包安装图解.jpg)
+
+      npm 安装完后 /项目/node_modules/buffer@^5.4.3 下也会有 node_modules 文件夹包含 base64-js@1.0.2 依赖；并且项目中的 node_modules 中也有 base64-js@^1.0.1 依赖
+
+      TODO: 这时候打包的话 base64 会打包两份？
+
+116. npm 版本前的标记：
+
+      @test@主版本号.次版本号.修订号
+
+      * ～: 只升级修订号
+      * ^: 升级次版本号和修订号
+      * *: 升级最新版本
+
+117. 模块
+
+      * commonJS: nodejs 的加载规范
+        * 模块的导出会被缓存，下次调用通过缓存去取
+        * 因为有缓存的cun
+
+118. 直播流协议
+
+      * RTMP：adobe的专用协议，在国内流行度很高，只要带有 flash player 就可以播放该协议直播。但是由于RTMP初次建立连接需要进行复杂的握手过程(底层基于tcp)，首开会带来100ms以上的延迟，直播内容延迟在2-5s。
+      * HTTP-FLV： 使用 http 协议流式的传输媒体内容，直播内容延迟在2-5s，打开速度快，由于http没有复杂的状态交互所以从延迟的角度来看要优于RTMP
+      * HLS： HTTPLiveStream 由苹果提出的基于HTTP的流媒体传输协议。有一个非常大的优点是：HTML5 可以直接打开播放，不需要安装其他东西。
+
+119. for...in... 循环遍历`键`；  for...of... 循环遍历`值`;
+
+120. 左边宽度固定，右边宽度自适应，且右边包含上下两行文字，超出宽度显示省略号
+
+      ```css
+      .parent {
+        display: flex;
+        width: 200px;
+      }
+      .left {
+        width: 60px;
+        height: 60px;
+        flex-shark: 0;
+        flex-grow: 0;
+      }
+      .right {
+        height: 60px;
+        flex: 1;
+        overflow: hidden;
+        width: 0;
+        /* overflow 和 width 二选一即可 */
+      }
+      
+      .ellipsis { /* 加在两行文字div上 */
+      	overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+      }
+      ```
+
+121. addEventListener(name, function, [capture | option])
+
+      在移除监听的时候 capture 参数必须和添加监听的时候一致，否则移除监听失败。captrue 默认为 false 
+
+      https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/removeEventListener
+     
+122. offsetTop 获取到的是该元素到 offsetParent 元素(position属性为fixed、abslute、relative的父元素，或者最近的table、td、th、body元素)的高度。
+
+123. 获取当前元素距离可视区顶部的高度
+
+      ```javascript
+      function getElementViewTop(element) {
+          // 获取元素到可视区顶部的高度
+          let actualTop = element.offsetTop;
+          let current = element.offsetParent;
+      
+          while (current !== null) {
+              actualTop += current.offsetTop;
+              current = current.offsetParent;
+          }
+          // 兼容性处理
+          const elementScrollTop = document.scrollingElement.scrollTop;
+          return actualTop - elementScrollTop;
+      }
+      
+      // document.body.scrollTop、document.documentElement.scrollTop
+      // 上面两个分别对应移动端、pc端，
+      ```
+
+124. 向 .gitignore 添加新文件
+
+      ```bash
+      git rm -r --cached . // 删除缓存
+      git add .
+      git commit -m 'update .gitignor
+      ```
+
+125. 文字方向设置
+
+      ```css
+      /** 控制文字显示方向(阅读的顺序)，例如可以从右往左等等 **/    
+      direction: rtl;
+      unicode-bidi: bidi-override; /* 换成embed属性可以使得文字右边对齐 */
+      ```
+
+      ![](/Users/zdwh/Desktop/工作日志/note/css效果图/文字展示方向.jpeg) 
+     
+126. vue 组件内部执行顺序
+
+      props => methods => data => computed => watch
+
+      详情见：https://github.com/vuejs/vue/blob/dev/src/core/instance/state.js#L45-L53 中的 `initState` 方法
+
+127. `npm run` 这个命令会将当前文件夹下 `node_modules/.bin` 目录下的所有脚本添加到 `PATH` 路径中，所以在 script 中可以直接使用 脚本名 进行调用。执行结束后再将 `PATH` 恢复原样。 
+
+      例如 .bin 目录下有个 wanwu 脚本，可以在 script 中直接写 `wanwu xxx` 进行使用。 
+
+128. querySelector 如果找不到对应的 DOM 节点，则会抛出错误，影响 js 的运行。通过 getElementBy*** 这种 api 在获取不到元素的时候不会抛出错误，容错性更好。所以可以优先使用。
+
+129. css 属性：offset-path 实现不规则运动动画。兼容性较差
+
+130. pc 线上代理到本地：
+
+      1. 修改 host 文件， mac上用了 ihost。 
+
+         ```bash
+         # host
+         127.0.0.1  h5.wanwudezhi.com
+         #将线上链接代理到了本地
+         ```
+
+         假设这时候 mall-web 运行在 8080 端口
+
+         此时直接访问 h5.wanwudezhi.com:8080 即可访问
+
+      2. 通过 nginx 代理多个本地项目
+
+         ```nginx
+         server {
+                 listen       8888;
+                 server_name  localhost;
+                 location /mall-web/ {
+                     proxy_pass http://10.10.57.1:8080;
+                 }
+                 location /live-web/ {
+                     proxy_pass http://10.10.57.1:10001;
+                 }
+                 location /base-mall/ {
+                     proxy_pass http://10.10.57.1:10001;
+                 }
+                 location /micro-live-web/ {
+                     proxy_pass http://10.10.57.1:10001;
+                 }
+                 location / {
+                     proxy_pass http://10.10.57.1:8080;
+                 }
+             }
+         ```
+
+         访问 h5.wanwudezhi.com:8888 nginx 解析path代理到不同的本地项目
+         
+      3. 关于 node_modules 下的 .bin 文件，这个文件夹下的文件都是软链，这些文件在 package 的 script 中调用不需要加文件名(node_modules/xxx)，node 会自动在运行时加上  
 
 
 
 
 
-
-
+# 
 
 **问题** （未解决）
 
