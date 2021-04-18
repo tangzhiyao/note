@@ -215,3 +215,27 @@ ssh-keygen -t ras -C "335406905@qq.com"
 # 找到创建目下的 .pub 后缀的文件，打开复制内容。打开github个人设置，找到ssh设置，添加新的ssh即可 
 ```
 
+
+
+Git lfs: （git 关于大文件的处理）
+
+安装 `git lfs install`
+
+最好是未添加过的大文件，首次进行添加：
+
+```bash
+git lfs track "fileName"
+git add .gitattributes
+git commit -m"添加lfs"
+git push
+```
+
+如果是已经添加过的，有过提交记录的文件，需要通过 `git migrate` 清除提交记录中关于该文件的记录。[相关博客](https://murphypei.github.io/blog/2019/12/git-lfs)
+
+
+
+git 报错
+
+err：RPC failed：([文档](https://jingyan.baidu.com/article/6b97984d7582d75da2b0bf93.html))
+
+1. 如果postBuffer太小，修改postBuffer。(遇到过一次，这个解决掉了问题)
