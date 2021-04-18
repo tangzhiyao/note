@@ -78,7 +78,7 @@
 
 10） 丢弃暂存区的修改
 
-​ 	 `git reset -- flie`	将暂存区的修改回退到工作区
+ 	 `git reset -- flie`	将暂存区的修改回退到工作区
 
 11）删除文件
 
@@ -187,7 +187,31 @@
 
 #### 设置忽略文件
 
- 	1. 手动创建 .gitignore 文件，需要在命令行中使用`touch .gitignore` ，否则需要提交 该文件之后才起作用
+  1. 手动创建 .gitignore 文件，需要在命令行中使用`touch .gitignore` ，否则需要提交 该文件之后才起作用
 
- 
+  2. 之前添加过，后来需要新增排除项
+
+     ```bash
+     git rm -r --cached .
+     git add .
+     git commit -m"修改gitignore"
+     ```
+
+
+
+Github 提交不上去
+
+> 错误信息:
+>
+> Please make sure you have the correct access rights
+> and the repository exists.
+
+ 由于用的是新电脑，没有配置 SSH key 导致的。
+
+```bash
+# git 的邮箱
+ssh-keygen -t ras -C "335406905@qq.com"
+# 一直回车, 不需要进行填写
+# 找到创建目下的 .pub 后缀的文件，打开复制内容。打开github个人设置，找到ssh设置，添加新的ssh即可 
+```
 
