@@ -987,6 +987,8 @@
          访问 h5.wanwudezhi.com:8888 nginx 解析path代理到不同的本地项目
          
       3. 关于 node_modules 下的 .bin 文件，这个文件夹下的文件都是软链，这些文件在 package 的 script 中调用不需要加文件名(node_modules/xxx)，node 会自动在运行时加上  
+     
+131. Vue 的初始化顺序： prop => methods => data => computed => watch
 
 
 
